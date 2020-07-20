@@ -1,0 +1,23 @@
+First name: <input (keyup)="inputYourName($event)" (keyup.enter)="saveData()" />
+<br />
+Last name:
+<input
+  #lastname
+  (keyup)="inputLastname(lastname.value)"
+  (keyup.enter)="saveData()"
+/>
+<br />
+<button (click)="saveData()">Save</button>
+<br />
+
+<p>Count = {{ selected }}/{{ users.length }}</p>
+
+<ul *ngIf="show">
+  <li
+    *ngFor="let user of users; let i = index"
+    [class.selected]="user.status"
+    (click)="onSelect(i)"
+  >
+    {{ user.name }}
+  </li>
+</ul>
