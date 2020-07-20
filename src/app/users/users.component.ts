@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -6,22 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  firstName = '';
-  lastName = '';
   users = []; // Array
   show = true;
   selected = 0;
 
-  inputYourName(event: any): void {
-    this.firstName = event.target.value;
+  loginForm: FormGroup;
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      firstName: [''],
+      lastName: [''],
+    });
   }
 
-  inputLastname(input: string): void {
-    this.lastName = input;
+  get f() {
+    return this.loginForm.controls;
   }
 
   saveData(): void {
-    const fullName = `${this.firstName} ${this.lastName}`;
+    const fullName = `${this.f.firstName.value} ${this.f.lastName.value}`;
     this.users.push({ name: fullName, status: false });
   }
 
@@ -29,6 +34,4 @@ export class UsersComponent implements OnInit {
     this.users[index].status = !this.users[index].status;
     this.selected = this.users.filter((u) => u.status).length;
   }
-
-  ngOnInit(): void {}
 }

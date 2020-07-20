@@ -1,14 +1,13 @@
-First name: <input (keyup)="inputYourName($event)" (keyup.enter)="saveData()" />
-<br />
-Last name:
-<input
-  #lastname
-  (keyup)="inputLastname(lastname.value)"
-  (keyup.enter)="saveData()"
-/>
-<br />
-<button (click)="saveData()">Save</button>
-<br />
+<form [formGroup]="loginForm" (ngSubmit)="saveData()">
+  First name:
+  <input formControlName="firstName" />
+  <br />
+  Last name:
+  <input formControlName="lastName" />
+  <br />
+  <button>Save</button>
+  <br />
+</form>
 
 <p>Count = {{ selected }}/{{ users.length }}</p>
 
