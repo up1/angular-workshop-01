@@ -6,10 +6,10 @@
       formControlName="firstName"
       class="form-control"
       [ngClass]="{
-        'is-invalid': submitted && loginForm.controls.firstName.errors
+        'is-invalid': submitted && f.firstName.errors
       }"
     />
-    <div *ngIf="loginForm.controls.firstName.errors" class="invalid-feedback">
+    <div *ngIf="f.firstName.errors" class="invalid-feedback">
       <div *ngIf="loginForm.controls.firstName.errors.required">
         First name is required
       </div>
@@ -41,11 +41,7 @@
 <p>Count = {{ selected }}/{{ users.length }}</p>
 
 <ul *ngIf="show">
-  <li
-    *ngFor="let user of users; let i = index"
-    [class.selected]="user.status"
-    (click)="onSelect(i)"
-  >
-    {{ user.name }}
+  <li *ngFor="let user of users; let i = index" (click)="onSelect(i)">
+    {{ user.name }}{{ user.status }}
   </li>
 </ul>

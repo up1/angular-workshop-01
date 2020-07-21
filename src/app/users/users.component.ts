@@ -1,3 +1,4 @@
+import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -7,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  users: any[] = []; // Array
+  users: User[] = []; // Array
   show = true;
   selected = 0;
   submitted = false;
@@ -17,7 +18,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(20)]],
       lastName: ['', Validators.required],
     });
   }
@@ -32,7 +33,9 @@ export class UsersComponent implements OnInit {
       return;
     }
     const fullName = `${this.f.firstName.value} ${this.f.lastName.value}`;
-    this.users.push({ name: fullName, status: false });
+
+    const user = new User(fullName, false);
+    this.users.push(user);
   }
 
   onSelect(index: number): void {
