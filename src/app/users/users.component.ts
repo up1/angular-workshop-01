@@ -1,6 +1,11 @@
 import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 
 type Users = User[];
 @Component({
@@ -24,7 +29,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  get f() {
+  get f(): any {
     return this.loginForm.controls;
   }
 

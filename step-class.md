@@ -1,4 +1,4 @@
-## Generatte class with Angular CLI
+## Generate class with Angular CLI
 
 ```
 $ng generate class models/user
