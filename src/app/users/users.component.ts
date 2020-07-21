@@ -2,13 +2,14 @@ import { User } from './../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+type Users = User[];
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  users: User[] = []; // Array
+  users: Users = []; // Array
   show = true;
   selected = 0;
   submitted = false;
