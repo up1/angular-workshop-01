@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -7,17 +7,18 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  users = []; // Array
+  users: any[] = []; // Array
   show = true;
   selected = 0;
+  submitted = false;
 
   loginForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
     });
   }
 
@@ -26,6 +27,10 @@ export class UsersComponent implements OnInit {
   }
 
   saveData(): void {
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
     const fullName = `${this.f.firstName.value} ${this.f.lastName.value}`;
     this.users.push({ name: fullName, status: false });
   }

@@ -1,12 +1,41 @@
 <form [formGroup]="loginForm" (ngSubmit)="saveData()">
-  First name:
-  <input formControlName="firstName" />
-  <br />
-  Last name:
-  <input formControlName="lastName" />
-  <br />
-  <button>Save</button>
-  <br />
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input
+      type="text"
+      formControlName="firstName"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': submitted && loginForm.controls.firstName.errors
+      }"
+    />
+    <div *ngIf="loginForm.controls.firstName.errors" class="invalid-feedback">
+      <div *ngIf="loginForm.controls.firstName.errors.required">
+        First name is required
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input
+      type="password"
+      formControlName="lastName"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': submitted && loginForm.controls.lastName.errors
+      }"
+    />
+    <div *ngIf="loginForm.controls.lastName.errors" class="invalid-feedback">
+      <div *ngIf="loginForm.controls.lastName.errors.required">
+        Last name is required
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary">
+      Save
+    </button>
+  </div>
 </form>
 
 <p>Count = {{ selected }}/{{ users.length }}</p>
